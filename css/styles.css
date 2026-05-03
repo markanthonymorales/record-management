@@ -74,6 +74,33 @@ body {
     font-weight: 600;
 }
 
+/* Form validation styles */
+.form-control:invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.form-control:valid:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+/* Modal improvements */
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Search results */
+.list-group-item h6 {
+    font-size: 0.95rem;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .container-fluid {
@@ -83,5 +110,41 @@ body {
     
     h1 {
         font-size: 1.5rem;
+    }
+
+    .table {
+        font-size: 0.85rem;
+    }
+
+    .btn-sm {
+        font-size: 0.75rem;
+        padding: 0.2rem 0.4rem;
+    }
+
+    /* Stack search form on mobile */
+    form.d-flex {
+        flex-direction: column;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    form.d-flex .form-control {
+        margin-bottom: 0.5rem;
+        margin-right: 0 !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .card-title {
+        font-size: 0.8rem;
+    }
+
+    .card h2 {
+        font-size: 1.5rem;
+    }
+
+    /* Hide search on very small screens or make it smaller */
+    #globalSearchForm {
+        display: none;
     }
 }

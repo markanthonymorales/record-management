@@ -44,6 +44,92 @@ const Storage = (function() {
             ];
             localStorage.setItem(KEYS.USERS, JSON.stringify(demoUsers));
         }
+
+        // Add sample data if no tasks or records exist (for testing)
+        addSampleDataIfEmpty();
+    }
+
+    /**
+     * Add sample data for testing if storage is empty
+     */
+    function addSampleDataIfEmpty() {
+        const tasks = getTasks();
+        const records = getRecords();
+
+        // Only add sample data if both are empty
+        if (tasks.length === 0 && records.length === 0) {
+            const sampleTasks = [
+                {
+                    id: 1001,
+                    title: 'Review quarterly reports',
+                    description: 'Review and approve Q1 2026 reports',
+                    status: 'Pending',
+                    assignedTo: 'staff',
+                    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                    createdBy: 'admin'
+                },
+                {
+                    id: 1002,
+                    title: 'Update employee records',
+                    description: 'Update contact information for new staff',
+                    status: 'In Progress',
+                    assignedTo: 'staff',
+                    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+                    createdBy: 'admin'
+                },
+                {
+                    id: 1003,
+                    title: 'Prepare meeting agenda',
+                    description: 'Prepare agenda for monthly team meeting',
+                    status: 'Completed',
+                    assignedTo: 'admin',
+                    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+                    createdBy: 'admin'
+                }
+            ];
+
+            const sampleRecords = [
+                {
+                    id: 2001,
+                    name: 'Q1 Financial Report',
+                    type: 'Report',
+                    details: 'Financial summary for Q1 2026',
+                    date: '2026-03-31',
+                    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+                    createdBy: 'admin'
+                },
+                {
+                    id: 2002,
+                    name: 'Office Layout Diagram',
+                    type: 'Image',
+                    details: 'Updated office layout with new workstations',
+                    date: '2026-04-15',
+                    createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
+                    createdBy: 'staff'
+                },
+                {
+                    id: 2003,
+                    name: 'Employee Handbook',
+                    type: 'Document',
+                    details: 'Updated employee handbook with new policies',
+                    date: '2026-04-20',
+                    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+                    createdBy: 'admin'
+                },
+                {
+                    id: 2004,
+                    name: 'Project Timeline',
+                    type: 'Document',
+                    details: 'Timeline for Record Management System project',
+                    date: '2026-05-01',
+                    createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+                    createdBy: 'admin'
+                }
+            ];
+
+            saveTasks(sampleTasks);
+            saveRecords(sampleRecords);
+        }
     }
 
     /**
@@ -184,6 +270,86 @@ const Storage = (function() {
         init(); // Re-initialize with defaults
     }
 
+    /**
+     * Reset all data and add fresh sample data
+     */
+    function resetWithSampleData() {
+        localStorage.removeItem(KEYS.TASKS);
+        localStorage.removeItem(KEYS.RECORDS);
+        // Keep users and current user
+        const tasks = [
+            {
+                id: 1001,
+                title: 'Review quarterly reports',
+                description: 'Review and approve Q1 2026 reports',
+                status: 'Pending',
+                assignedTo: 'staff',
+                createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+                createdBy: 'admin'
+            },
+            {
+                id: 1002,
+                title: 'Update employee records',
+                description: 'Update contact information for new staff',
+                status: 'In Progress',
+                assignedTo: 'staff',
+                createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+                createdBy: 'admin'
+            },
+            {
+                id: 1003,
+                title: 'Prepare meeting agenda',
+                description: 'Prepare agenda for monthly team meeting',
+                status: 'Completed',
+                assignedTo: 'admin',
+                createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+                createdBy: 'admin'
+            }
+        ];
+
+        const records = [
+            {
+                id: 2001,
+                name: 'Q1 Financial Report',
+                type: 'Report',
+                details: 'Financial summary for Q1 2026',
+                date: '2026-03-31',
+                createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+                createdBy: 'admin'
+            },
+            {
+                id: 2002,
+                name: 'Office Layout Diagram',
+                type: 'Image',
+                details: 'Updated office layout with new workstations',
+                date: '2026-04-15',
+                createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
+                createdBy: 'staff'
+            },
+            {
+                id: 2003,
+                name: 'Employee Handbook',
+                type: 'Document',
+                details: 'Updated employee handbook with new policies',
+                date: '2026-04-20',
+                createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
+                createdBy: 'admin'
+            },
+            {
+                id: 2004,
+                name: 'Project Timeline',
+                type: 'Document',
+                details: 'Timeline for Record Management System project',
+                date: '2026-05-01',
+                createdAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+                createdBy: 'admin'
+            }
+        ];
+
+        saveTasks(tasks);
+        saveRecords(records);
+    }
+
     // Initialize on load
     init();
 
@@ -203,6 +369,7 @@ const Storage = (function() {
         getCurrentUser,
         setCurrentUser,
         clearCurrentUser,
-        clearAll
+        clearAll,
+        resetWithSampleData
     };
 })();
